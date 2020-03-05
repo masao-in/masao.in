@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>まさおコンストラクション用xml仕様書</title>
+		<style type="text/css">
+		pre{ width:100%;padding-left:1em;color:gray;border-left:1px solid black; }
+		table{
+			border: 1px #E3E3E3 solid;
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+		table th {
+			border: #E3E3E3 solid;
+			border-width: 0 0 1px 1px;
+			background: #F5F5F5;
+			font-weight: bold;
+			line-height: 120%;
+		}
+		table td {
+			padding: 5px;
+			border: 1px #E3E3E3 solid;
+			border-width: 0 0 1px 1px;
+		}
+		#Index_simplified ol{
+			counter-reset: item;
+			padding-left:0.5em;
+		}
+		#Index_simplified li{
+			display: block;
+		}
+		#Index_simplified li:before{
+			content: counters(item, ".", decimal) ".";
+			counter-increment:item;
+		}
+		#main-contents div{
+			margin-left:1em;
+		}
+		#main-contents{
+			counter-reset:h2item;
+		}
+		#main-contents h2{
+			counter-reset:h3item;
+		}
+		#main-contents h2:before{
+			content:counter(h2item) ".";
+			counter-increment:h2item;
+		}
+		#main-contents h3{
+			counter-reset:h4item;
+		}
+		#main-contents h3:before{
+			content:counter(h2item) "." counter(h3item) ".";
+			counter-increment:h3item;
+		}
+		#main-contents h4{
+			counter-reset:h5item;
+		}
+		#main-contents h4:before{
+			content:counter(h2item) "." counter(h3item) "." counter(h4item) ".";
+			counter-increment:h4item;
+		}
+		caption{
+			display:none;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<!-- head部 -->
+			<div id="head" class="mainColor">
+				<h1>まさおコンストラクション用xml仕様書</h1>
+				<p>2009年07月25日付 juner's site 勧告</p>
+				<dl>
+					<dt>まさおコンストラクション</dt>
+					<dd><a href="http://www.t3.rim.or.jp/~naoto/naoto.html">http://www.t3.rim.or.jp/~naoto/naoto.html</a></dd>
+				</dl>
+			</div>
+			<!-- body部 -->
+			<div id="body">
+				<h2>概要</h2>
+				<p>正男を定義する為のxmlを作ってみました。今後、正男エディタのデータを統一する際などに利用される考慮した形式です。</p>
+				<h2>この文書の地位</h2>
+				<p>福田直人氏の物ではないので、公式としての地位は無いですが、正男同盟に於ける数少ない形式案として少しの地位はありそうです。</p>
+				<div id="Index_simplified">
+					<h2>簡略目次</h2>
+					<ol>
+						<li><a href="#The_specifications_for_the_construction_Masao_xml">まさおコンストラクション用xml仕様書について</a></li>
+						<li><a href="#Construction_and_related_upstream_Masao" >本家まさおコンストラクションとの関係</a></li>
+						<li><a href="#MasaoConstructionXmlSchema_structure">MasaoConstructionXmlSchemaの構造</a>
+							<ol>
+								<li><a href="#masao_element">masao要素</a></li>
+								<li><a href="#options_element">options要素</a></li>
+								<li><a href="#title_element">title要素</a></li>
+								<li><a href="#option_element">option要素</a></li>
+								<li><a href="#scrpit_element">scripts要素</a></li>
+								<li><a href="#script_element">script要素</a></li>
+								<li><a href="#styles_element">styles要素</a></li>
+								<li><a href="#style_element">style要素</a></li>
+								<li><a href="#params_element">params要素</a></li>
+								<li><a href="#param_element">param要素</a></li>
+							</ol>
+						</li>
+					</ol>
+				</div>
+				<div id="main-contents">
+					<h2 id="The_specifications_for_the_construction_Masao_xml">まさおコンストラクション用xml仕様書について</h2>
+					<p>このxmlは正男のデータをhtmlと分離して、再利用性を高める為の形式として考案されました。</p>
+					<p>正男のソフトウェア側での保存形式や、サーバーサイド、サイトの正男のデータの保管形式として使うことを想定しています。</p>
+					<h2 id="Construction_and_related_upstream_Masao">本家まさおコンストラクションとの関係</h2>
+					<p>本家、福田直人のページのコンテンツであるまさおコンストラクションとは一次創作物と二次創作物の扱いになり、福田直人のページの正男コンストラクションの仕様に対して常に準ずる形となります。</p>
+					<h2 id="MasaoConstructionXmlSchema_structure">MasaoConstructionXmlSchemaの構造</h2>
+					<p>簡単なMasaoConstractionは以下の様なタグによって作成することが出来ます。</p>
+					<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br />&lt;masao xmlns="http://masao.in/2009/masaoConstruction" &gt;<br /><div style="padding-left:1em;">&lt;options&gt;<br /><div style="padding-left:1em;">&lt;title&gt;まさお コンストラクション&lt;/title&gt;<br /></div>&lt;/options&gt;<br />&lt;params /&gt;<br /></div>&lt;/masao&gt;</pre>
+					<p>これによってまさおコンストラクションサンプルステージ１が表示される内容が作ることが出来ます。</p>
+					<h3 id="masao_element">masao要素</h3>
+					<p>xml内に必ず一つ必要な要素。親要素。中にoptions要素とparams要素を必ず含まなくてはならない。</p>
+					<p>また、scripts要素、styles要素を任意に含む事が出来る。</p>
+					<h3 id="options_element">options要素</h3>
+					<p>まさおデータの付加情報についての定義を行う為の要素。この要素にtitleや、次のステージ、前のステージ、作者情報などを入れることとなる。title要素を必須要素として、任意にoption要素を入れることが出来る。</p>
+					<h3 id="title_element">title要素</h3>
+					<p>まさおデータのタイトルを書かなくてはならない。</p>
+					<h3 id="option_element">option要素</h3>
+					<p>各種値を入れる要素。以下の様に書くことが出来る。</p>
+					<pre>&lt;option type="subtitle" value="ステージ01"/&gt;</pre>
+					<p>typeにその情報keyを、valueにその値を入れている。又、以下の様にも書くことが出来る。</p>
+					<pre>&lt;option type="description"&gt;<br /><div style="padding-left:1em;">&lt;![CDATA[このステージは初歩の初歩のステージです。チコリンの攻撃に注意。]]&gt;</div>&lt;/option&gt;</pre>
+					<p>先程と同様にtypeに情報key、そして要素内にvalueの代わりの値をCDATAとして入れている。文章が長くなる場合や、属性として使えない値を使う場合に用いることが出来る。</p>
+					<p>また、typeとして以下の様な値が定義されている。</p>
+					<table summary="option要素のtype属性に入れる値のうち、定義されているkeyの一覧。">
+						<caption>option要素のtype属性用定義済みkey一覧</caption>
+						<thead>
+							<tr><th>key</th><th>用途</th></tr>
+						</thead>
+						<tbody>
+							<tr><td>subtitle</td><td>ページの副題</td></tr>
+							<tr><td>description</td><td>ページの概要</td></tr>
+							<tr><td>next</td><td>次のページへのリンク</td></tr>
+							<tr><td>prev</td><td>前のページへのリンク</td></tr>
+							<tr><td>createrSite</td><td>制作者のサイト</td></tr>
+							<tr><td>persuade</td><td>ページの説明</td></tr>
+							<tr><td>author</td><td>制作者名</td></tr>
+							<tr><td>copyright</td><td>著作権</td></tr>
+						</tbody>
+					</table>
+					<p>直、同じoptionに同じkeyを指定しても良い為、幾つも同様のkeyの要素を作る事も可能である。</p>
+					<h3 id="scrpit_element">scripts要素</h3>
+					<p>任意要素で、無くても問題無いです。主にまさおコンストラクションをEcmaScriptやJavaScript、VBScriptによる制御する際に用います。</p>
+					<p>子要素として一つ以上のscript要素を持ちます。</p>
+					<h3 id="script_element">script要素</h3>
+					<p>scriptを定義する要素です。</p>
+					<p>type属性を持つことが出来る。省略した場合、その値は<code>application/ecmascirpt</code>となる。他にも<code>text/javascript</code>,<code>text/ecmascript</code>、<code>application/javascript</code>も指定することが出来る。IE専用ではあるが、<code>text/vbscript</code>も利用は可能である。</p>
+					<p>また、src属性を付けた場合に外部JavaScriptファイルを指定することが出来る。</p>
+					<h3 id="styles_element">styles要素</h3>
+					<p>任意要素で、無くても問題無いです。主にまさおコンストラクションのデザインを決める要素ではありますが、出力時にデザインも統一してしまうため、必要は無いです。主に特殊なデザインのステージを作るときに用います。</p>
+					<h3 id="style_element">style要素</h3>
+					<p>styleを定義する要素。内部に直接スタイルを定義することが出来るが、href属性を持つことで外部スタイルを読み込むことが出来る。</p>
+					<p>type要素を省略す事が出来るが、省略した場合は<code>text/css</code>と扱われる。</p>
+					<h3 id="params_element">params要素</h3>
+					<p>必須要素で、code属性とid属性とversion属性を指定することが出来る。</p>
+					<p>0個以上のparam要素を持つ。</p>
+					<div>
+						<h4>code属性</h4>
+						<p>code属性はまさおのjarファイル内のclass名を入れる。省略時は<code>MasaoConstruction.class</code>が指定される。FXシリーズの機能を十二分に利用する為には<code>MasaoJSS.class</code>を指定する必要性がある。</p>
+						<h4>id属性</h4>
+						<p>id属性は省略可能で、省略した場合は何も指定されない物とする。</p>
+						<h4>version属性</h4>
+						<p>まさおコンストラクションのバージョンを指定する。省略した場合、その実行環境で準備されている最新の物であるとする。バージョンの表記方法はclassicシリーズとなる<code>Version3.1</code>やFXシリーズとなる<code>FXUpdate7</code>の様な表記方法を用いる。</p>
+					</div>
+					<h3 id="param_element">param要素</h3>
+					<p>まさおのparam要素そのものである。本家まさおのparam要素とname属性、value属性がそのまま対応する。</p>
+				</div>
+			</div>
+			<!-- foot部 -->
+			<div id="foot" class="mainColor">
+			<address>Created by <a href="mailto:juner@juner.net">juner</a>. </address>
+			</div>
+		</div>
+	</body>
+</html>

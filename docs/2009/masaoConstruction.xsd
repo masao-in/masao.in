@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"  targetNamespace="http://masao.in/2009/masaoConstruction" >
+	<xsd:element name="masao">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element name="options"  minOccurs="1" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:choice>
+							<xsd:element name="title" type="xsd:string" minOccurs="1" maxOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>必須要素。options要素内に必ず一つ必要な要素。
+その“まさお”のタイトルとなる要素。</xsd:documentation>
+								</xsd:annotation></xsd:element>
+							<xsd:element name="option" nillable="true" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="xsd:string">
+											<xsd:attribute name="type" type="xsd:string" use="required"/>
+											<xsd:attribute name="value" type="xsd:string" use="required"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+			        	</xsd:choice>
+					</xsd:complexType>
+			    </xsd:element>
+				<xsd:element name="scripts" minOccurs="0" maxOccurs="1" >
+                    <xsd:annotation>
+                    	<xsd:documentation>script要素を使わない時は作らない。</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="script" nillable="true" minOccurs="1" maxOccurs="unbounded">
+                                <xsd:annotation>
+                                	<xsd:documentation>scripts要素があったら必須要素となる。typeは主に“text/ecmascript”と“text/javascript”、“text/vbscript”の三種類が使える。</xsd:documentation>
+                                </xsd:annotation>
+                                <xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension
+											base="xsd:string">
+											<xsd:attribute name="src"
+												type="xsd:string" />
+											<xsd:attribute name="type">
+												<xsd:simpleType>
+													<xsd:restriction
+														base="xsd:string">
+														<xsd:enumeration value="text/ecmascript"  />
+														<xsd:enumeration value="text/vbscript" />
+														<xsd:enumeration value="text/javascript" />
+														<xsd:enumeration value="application/ecmascript" />
+														<xsd:enumeration value="application/javascript" />
+													</xsd:restriction>
+												</xsd:simpleType>
+											</xsd:attribute>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+			        	</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="styles" minOccurs="0" maxOccurs="1" >
+                    <xsd:annotation>
+                    	<xsd:documentation>必須ではない要素。style要素を使わない場合は作らない。
+勿論、デザインは別でやるべきなのでこれは使わない事に限る。</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="style" nillable="true" minOccurs="1" maxOccurs="unbounded">
+                                <xsd:annotation>
+                                	<xsd:documentation></xsd:documentation>
+                                </xsd:annotation>
+                                <xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension
+											base="xsd:string">
+											<xsd:attribute name="href"
+												type="xsd:string" />
+											<xsd:attribute name="type"
+												use="optional">
+												<xsd:simpleType>
+													<xsd:restriction
+														base="xsd:string">
+														<xsd:enumeration
+															value="text/css" />
+													</xsd:restriction>
+												</xsd:simpleType>
+											</xsd:attribute>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+			        	</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="params" minOccurs="1" maxOccurs="1" >
+                    <xsd:annotation>
+                    	<xsd:documentation>必須要素
+子要素のparamを作成しなくとも必ず作成する。</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="param" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:choice>
+										<xsd:element name="time" maxOccurs="24" minOccurs="0">
+											<xsd:complexType>
+												<xsd:attribute
+													name="sdate" use="optional" type="xsd:decimal" />
+												<xsd:attribute
+													name="edate" use="optional" type="xsd:decimal" />
+												<xsd:attribute
+													name="date" use="optional" type="xsd:decimal" />
+												<xsd:attribute
+													name="value" use="required" type="xsd:string" />
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:choice>
+									<xsd:attribute name="name"
+										use="required" type="xsd:string" />
+									<xsd:attribute name="value"
+										use="required" type="xsd:string" />
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
